@@ -1,4 +1,5 @@
 import os
+import shlex
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -12,7 +13,8 @@ def load_env() -> None:
             line = line.strip()
             if line and not line.startswith("#"):
                 key, value = line.split("=", 1)
-                os.environ.setdefault(key, value)
+                parsed = shlex.split(value, comments=True)
+                os.environ.setdefault(key, parsed[0] if parsed else "")
 
 
 def env(name: str) -> str:
