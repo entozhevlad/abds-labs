@@ -108,6 +108,19 @@ class ApiTests(unittest.IsolatedAsyncioTestCase):
                 )
         self.assertEqual(self.service.mock_calls, [])
 
+    async def test_historical_tariff_date_is_valid(self) -> None:
+        self.service.get_tariff.return_value = {
+            "id": 1,
+            "name": "Test",
+            "price_day_kwph": 1,
+            "price_night_kwph": 1,
+            "valid_from": "1900-01-01 00:00:00",
+            "valid_to": "1901-01-01 00:00:00",
+        }
+        status, _ = await call(self.app, "GET", "/tariffs", query=b"date=1900-01-01")
+        self.assertEqual(status, 200)
+        self.service.get_tariff.assert_called_once_with("1900-01-01")
+
     async def test_body_limit(self) -> None:
         self.assertEqual(
             await call(self.app, "PATCH", "/users/1", b"x" * 65537),

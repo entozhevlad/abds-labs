@@ -230,6 +230,7 @@ class IntegrationTests(unittest.TestCase):
         ):
             self.assertEqual(request("GET", path)[0], 400, path)
         self.assertEqual(request("GET", "/tariffs?date=2022-01-01")[0], 404)
+        self.assertEqual(request("GET", "/tariffs?date=1900-01-01")[0], 404)
         self.assertEqual(request("PATCH", f"/users/{TEST_ID}", {})[0], 400)
 
     def test_scd_users(self) -> None:

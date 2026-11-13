@@ -19,6 +19,14 @@ def valid_date(value: str) -> str:
     return value
 
 
+def valid_calendar_date(value: str) -> str:
+    """Проверяет календарную дату без ограничения диапазона."""
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        raise ValueError("Expected YYYY-MM-DD")
+    date.fromisoformat(value)
+    return value
+
+
 def nonempty(value: str) -> str:
     if not value.strip():
         raise ValueError("Empty string")
@@ -34,5 +42,8 @@ def query_uint(value: object) -> object:
 
 
 DateString = Annotated[str, Field(strict=True), AfterValidator(valid_date)]
+CalendarDateString = Annotated[
+    str, Field(strict=True), AfterValidator(valid_calendar_date)
+]
 NonemptyString = Annotated[str, Field(strict=True), AfterValidator(nonempty)]
 QueryUInt = Annotated[UInt64, BeforeValidator(query_uint)]

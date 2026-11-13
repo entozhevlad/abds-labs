@@ -57,8 +57,10 @@ class EnergosbytService:
     def get_tariff(self, day: str) -> dict[str, Any]:
         rows = self.db.rows(
             "SELECT id, name, price_day_kwph, price_night_kwph, valid_from, valid_to "
-            "FROM dim_tariffs FINAL WHERE valid_from <= toDateTime({day:Date}) "
-            "AND toDateTime({day:Date}) < valid_to ORDER BY id LIMIT 1",
+            "FROM dim_tariffs FINAL "
+            "WHERE toDate32(valid_from) <= toDate32({day:String}) "
+            "AND toDate32({day:String}) < toDate32(valid_to) "
+            "ORDER BY id LIMIT 1",
             {"day": day},
         )
         if not rows:
