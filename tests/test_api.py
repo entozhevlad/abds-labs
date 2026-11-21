@@ -98,7 +98,7 @@ class ApiTests(unittest.IsolatedAsyncioTestCase):
                 "/realty/1/readings",
                 b"",
                 b"date_from=2026-01-02&date_to=2026-01-01",
-                'invalid "date_to" parameter',
+                'invalid "date_from" parameter',
             ),
         ):
             with self.subTest(path=path, body=body, query=query):

@@ -35,11 +35,6 @@ class EnergosbytService:
                 user["phone_prev"] = user["phone"]
                 user["phone"] = changes["phone"]
             if "fio" in changes:
-                self.db.execute(
-                    "ALTER TABLE dim_users UPDATE fio = {fio:String} "
-                    "WHERE id = {id:UInt64} SETTINGS mutations_sync = 1",
-                    {"id": identifier, "fio": changes["fio"]},
-                )
                 user["fio"] = changes["fio"]
             user["updated_at"] = timestamp(user["updated_at"])
             self.db.insert("dim_users", [user])

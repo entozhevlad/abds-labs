@@ -1,6 +1,6 @@
 # Лабораторный проект
 
-[![labs](https://github.com/{your_username}/{your_repo}/actions/workflows/energosbyt.energosbyt.lab.yml/badge.svg)](https://github.com/{your_username}/{your_repo}/actions/workflows/energosbyt.energosbyt.lab.yml)
+[![labs](https://github.com/entozhevlad/abds-labs/actions/workflows/energosbyt.lab.yml/badge.svg)](https://github.com/entozhevlad/abds-labs/actions/workflows/energosbyt.lab.yml)
 
 Backend-сервис вымышленной ЖКХ-компании для практики по курсу
 «Архитектура систем обработки больших данных».
@@ -15,10 +15,6 @@ Backend-сервис вымышленной ЖКХ-компании для пр�
    процесс разработки и проверки.
 4. **[Документация курса](https://github.com/sitnikovik/abds)** — методические
    материалы и дополнительные ресурсы.
-
-> [!IMPORTANT]
-> Поменяйте `{your_username}` и `{your_repo}` в badge на ваши имя пользователя
-> и название репозитория.
 
 ## Лабораторная №1
 
@@ -101,12 +97,12 @@ FROM dim_users FINAL
 WHERE id = 1;
 
 SELECT count()
-FROM dim_users
+FROM dim_users FINAL
 WHERE id = 1 AND fio = 'Иванов Иван 1';
 ```
 
 Первый запрос показывает новое ФИО, последний телефон и предыдущий телефон.
-Второй возвращает `0`: старое ФИО перезаписано по SCD 1.
+Второй возвращает `0`: с `FINAL` видно только актуальное ФИО по SCD 1.
 
 ### SCD 2 и старый счёт
 

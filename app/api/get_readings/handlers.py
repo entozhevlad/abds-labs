@@ -19,5 +19,5 @@ def get_readings(
     date_to: Annotated[DateString, Query()],
 ) -> ReadingsResponse:
     if date_from > date_to:
-        invalid("date_to", "parameter")
+        invalid("date_from", "parameter")
     return ReadingsResponse.model_validate(service.get_readings(id, date_from, date_to))

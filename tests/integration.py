@@ -254,7 +254,7 @@ class IntegrationTests(unittest.TestCase):
         )
         self.assertEqual(
             self.db.rows(
-                "SELECT count() AS n FROM dim_users "
+                "SELECT count() AS n FROM dim_users FINAL "
                 "WHERE id = {id:UInt64} AND fio = 'Old Name'",
                 {"id": TEST_ID},
             )[0]["n"],
