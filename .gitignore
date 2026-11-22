@@ -42,6 +42,8 @@ logs/
 # Docker
 # ============================================
 docker-compose.override.yml
+data/
+volume/
 
 # ============================================
 # Harness
@@ -85,6 +87,8 @@ __pycache__/
 venv/
 env/
 .venv/
+.ruff_cache/
+.mypy_cache/
 
 # Node.js
 node_modules/
